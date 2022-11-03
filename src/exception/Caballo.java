@@ -1,5 +1,7 @@
 package exception;
 
+import javax.swing.JOptionPane;
+
 public class Caballo extends Animal{
     
     private int patas;
@@ -46,7 +48,7 @@ public class Caballo extends Animal{
             super.setVelocidad(super.getVelocidad()+acelera);
         }
         } catch (LimiteVelocidadException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         
     }

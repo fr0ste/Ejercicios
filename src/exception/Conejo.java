@@ -4,6 +4,8 @@
  */
 package exception;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author labingsw05
@@ -11,6 +13,16 @@ package exception;
 public class Conejo extends Animal{
     
     private int patas;
+    private final int VELOCIDADMAX = 30;
+
+    public Conejo(int patas, String codigo, String nombre, double velocidad) {
+        super(codigo, nombre, velocidad);
+        this.patas = patas;
+    }
+
+    public Conejo(int patas) {
+        this.patas = patas;
+    }
     
     @Override
     public String sonido() {
@@ -18,25 +30,23 @@ public class Conejo extends Animal{
     }
 
     @Override
-    public void setVelocidad(double velocidad) {
-                
-        
-        if (velocidad > 30) {
-            
-            System.out.println("peligro");
-            
-        } else {
-            super.setVelocidad(velocidad);
+    public void acelerar(double acelera) throws LimiteVelocidadException {
+        try{
+        if((super.getVelocidad() + acelera) > this.VELOCIDADMAX){
+            throw new LimiteVelocidadException("Excediendo de límite");            
+        }{
+            super.setVelocidad(super.getVelocidad()+acelera);
         }
-        
+        } catch (LimiteVelocidadException e) {
+           JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
-
-
+    
     
 
     @Override
     public String toString() {
-        return "Conejo{" + "patas=" + patas + '}';
+        return super.getNombre() + " va a una velocidad de:" + super.getVelocidad() + " km/h ";
     }
 
     
